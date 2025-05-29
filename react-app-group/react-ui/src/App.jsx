@@ -1,8 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { Button } from "react-dom-lib";
-import { add } from "react-func-lib";
-
+import { sumTwoNum, MyComponent } from "react-ts-lib";
 function App() {
   return (
     <div className="App">
@@ -17,14 +15,9 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn React.{sumTwoNum(1, 2)}
         </a>
-        <Button
-          label="Click Me"
-          onClick={() => {
-            alert("Clicked!" + add(1, 2));
-          }}
-        />
+        <MyComponent name="frank" />
       </header>
     </div>
   );

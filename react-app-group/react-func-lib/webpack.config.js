@@ -1,10 +1,10 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'react-func-lib.js',
+    filename: 'index.js',
     library: 'MyReactLib',
     libraryTarget: 'umd',
     globalObject: 'this'
@@ -15,7 +15,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
+          loader: 'eslint-loader'
         }
       }
     ]

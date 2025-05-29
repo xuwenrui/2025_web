@@ -2,7 +2,7 @@
   "name": "react-func-lib",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/react-func-lib.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "eslint-loader": "^4.0.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
