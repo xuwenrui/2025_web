@@ -1,0 +1,43 @@
+class ConnectionMonitor {
+  constructor(baseURL) {
+    this.baseURL = baseURL;
+    this.isConnected = false;
+  }
+
+  async checkConnection() {
+    try {
+      const response = await fetch(`${this.baseURL}/health`, {
+        method: 'HEAD',
+        cache: 'no-cache'
+      });
+      this.isConnected = true;
+      return true;
+    } catch (error) {
+      this.isConnected = false;
+      return false;
+    }
+  }
+
+  async waitForConnection(retries = 10, interval = 2000) {
+    for (let i = 0; i < retries; i++) {
+      if (await this.checkConnection()) {
+        console.log('服务连接成功');
+        return true;
+      }
+      console.log(`等待服务启动... (${i + 1}/${retries})`);
+      await new Promise(resolve => setTimeout(resolve, interval));
+    }
+    throw new Error('无法连接到服务');
+  }
+}
+
+// 使用
+const monitor = new ConnectionMonitor('https://127.0.0.1:5900');
+monitor.waitForConnection()
+  .then(() => {
+    // 服务可用，开始正常操作
+    initializeApp();
+  })
+  .catch(error => {
+    showError('无法连接到后端服务，请确保服务已启动并在5900端口监听');
+  });
