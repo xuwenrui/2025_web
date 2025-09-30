@@ -1,3 +1,76 @@
+
+// 实用的连接检测函数
+async function checkServerConnection() {
+  const url = 'https://127.0.0.1:5900';
+  
+  try {
+    console.log('正在检测服务连接...');
+    
+    // 方法1: 使用简单的HEAD请求
+    const response = await fetch(url, {
+      method: 'HEAD',
+      mode: 'no-cors', // 避免CORS问题
+      cache: 'no-cache'
+    });
+    
+    console.log('✅ 服务连接正常');
+    return true;
+    
+  } catch (error) {
+    // 处理连接拒绝错误
+    if (error.name === 'TypeError' || error.message.includes('Failed to fetch')) {
+      console.error('❌ 连接被拒绝 - 服务未启动或端口错误');
+      console.log('请检查:');
+      console.log('1. 后端服务是否正在运行');
+      console.log('2. 服务是否监听在5900端口');
+      console.log('3. 防火墙是否阻止了连接');
+      
+      // 显示用户友好的错误信息
+      showConnectionError();
+      return false;
+    }
+    throw error;
+  }
+}
+
+function showConnectionError() {
+  // 在页面显示明显的错误提示
+  const errorHtml = `
+    <div style="
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #ff4444;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      z-index: 10000;
+      font-family: Arial, sans-serif;
+    ">
+      <strong>连接错误:</strong> 无法连接到后端服务 (127.0.0.1:5900)
+      <br>
+      <small>请确保后端服务已启动并在5900端口监听</small>
+      <button onclick="this.parentElement.style.display='none'" 
+        style="margin-left: 20px; background: white; border: none; padding: 5px 10px; border-radius: 3px;">
+        关闭
+      </button>
+    </div>
+  `;
+  
+  document.body.insertAdjacentHTML('afterbegin', errorHtml);
+}
+
+// 页面加载时检测
+document.addEventListener('DOMContentLoaded', function() {
+  checkServerConnection();
+});
+
+
+
+
+————————————
+
 class ConnectionMonitor {
   constructor(baseURL) {
     this.baseURL = baseURL;
