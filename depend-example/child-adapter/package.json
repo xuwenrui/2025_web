@@ -1,0 +1,41 @@
+{
+  "name": "child-adapter",
+  "version": "1.1.0",
+  "description": "ES6模块化适配器库",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./counts": {
+      "import": "./dist/counts.js"
+    },
+    "./constants": {
+      "import": "./dist/constants.js"
+    },
+    "./*": {
+      "import": "./dist/*.js"
+    }
+  },
+  "scripts": {
+    "build": "webpack --mode=production",
+    "build:dev": "webpack --mode=development",
+    "dev": "webpack --mode=development --watch"
+  },
+  "devDependencies": {
+    "webpack": "^5.88.0",
+    "webpack-cli": "^5.1.4",
+    "@babel/core": "^7.22.0",
+    "@babel/preset-env": "^7.22.0",
+    "babel-loader": "^9.1.0"
+  },
+  "keywords": [
+    "adapter",
+    "es6",
+    "modules"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
