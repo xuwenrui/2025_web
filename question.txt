@@ -5,6 +5,8 @@
 Replica 2: Smallest string is the common prefix 
 3 All different strings 
 4 Single character is repeated in all the strings 
+
+https://allegischina.wjx.cn/vm/Qzk9p1z.aspx?guid=fcf478fe-844a-457b-963b-1692f887b27d
 5 All strings are same 6 Single string
 Advanced test cases:
 1 Sample 1: jumbled order strings 
